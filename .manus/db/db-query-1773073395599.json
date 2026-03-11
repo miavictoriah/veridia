@@ -1,0 +1,70 @@
+{
+  "query": "SELECT id, title, estimatedCost, category FROM capexItems LIMIT 10;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway04.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 2ywKgUCAusN5TAm.root --database 9MBqjC5D3uHivAp33CthKN --execute SELECT id, title, estimatedCost, category FROM capexItems LIMIT 10;",
+  "rows": [
+    {
+      "id": "30001",
+      "title": "Heritage-Sensitive HVAC Modernisation",
+      "estimatedCost": "1800000",
+      "category": "energy_efficiency"
+    },
+    {
+      "id": "30002",
+      "title": "Roof Insulation & Solar PV",
+      "estimatedCost": "1400000",
+      "category": "retrofit"
+    },
+    {
+      "id": "30003",
+      "title": "Facade & Glazing Upgrade",
+      "estimatedCost": "3200000",
+      "category": "retrofit"
+    },
+    {
+      "id": "30004",
+      "title": "Smart Building Controls",
+      "estimatedCost": "1300000",
+      "category": "energy_efficiency"
+    },
+    {
+      "id": "30005",
+      "title": "Full Retail Centre Energy Retrofit",
+      "estimatedCost": "4200000",
+      "category": "retrofit"
+    },
+    {
+      "id": "30006",
+      "title": "Building Fabric Improvements",
+      "estimatedCost": "1600000",
+      "category": "retrofit"
+    },
+    {
+      "id": "30007",
+      "title": "Solar PV & Battery Storage",
+      "estimatedCost": "1200000",
+      "category": "energy_efficiency"
+    },
+    {
+      "id": "30008",
+      "title": "HVAC System Replacement",
+      "estimatedCost": "900000",
+      "category": "energy_efficiency"
+    },
+    {
+      "id": "30009",
+      "title": "Industrial Roof & Cladding Replacement",
+      "estimatedCost": "2400000",
+      "category": "retrofit"
+    },
+    {
+      "id": "30010",
+      "title": "Unit Heating Upgrades",
+      "estimatedCost": "1000000",
+      "category": "energy_efficiency"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\ttitle\testimatedCost\tcategory\n30001\tHeritage-Sensitive HVAC Modernisation\t1800000\tenergy_efficiency\n30002\tRoof Insulation & Solar PV\t1400000\tretrofit\n30003\tFacade & Glazing Upgrade\t3200000\tretrofit\n30004\tSmart Building Controls\t1300000\tenergy_efficiency\n30005\tFull Retail Centre Energy Retrofit\t4200000\tretrofit\n30006\tBuilding Fabric Improvements\t1600000\tretrofit\n30007\tSolar PV & Battery Storage\t1200000\tenergy_efficiency\n30008\tHVAC System Replacement\t900000\tenergy_efficiency\n30009\tIndustrial Roof & Cladding Replacement\t2400000\tretrofit\n30010\tUnit Heating Upgrades\t1000000\tenergy_efficiency\n",
+  "stderr": "",
+  "execution_time_ms": 396
+}

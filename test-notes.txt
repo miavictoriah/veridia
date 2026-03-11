@@ -1,0 +1,14 @@
+Property Detail Modal - Selfridges:
+- Shows EPC D, Risk Score 65, Retrofit £3.2M, Payback 8 yrs, MEES Compliant
+- Property Details: Retail, 1909, 51,000 sqm, 5 storeys, Lettable Yes
+- Flood Risk section: Zone 1, Very Low risk, Surface Water source
+- Land Registry: Title NGL123456, Freehold, Owner Selfri..., Last Sale £4.0B, Sale Date 2003-07-01
+- Planning: Authority City of Westminster, Zone Conservation Area, 8 Nearby Apps
+- Planning Constraints: Grade II* Listed, Central Activities Zone, West End Special Retail Policy
+- All data showing correctly and well formatted
+- Teal color scheme applied
+
+ISSUES FOUND:
+- Owner name truncated "Selfri..." - should show more or have tooltip
+- Last sale £4.0B looks correct for Selfridges
+- Overall the modal looks great with the three new data sections

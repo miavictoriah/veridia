@@ -1,0 +1,13 @@
+Screenshot observations:
+- Landing page looks clean with Veridia branding
+- Nav has Features, Use Cases, Pricing, Request Demo links
+- Pricing link in nav uses href="#pricing" which should scroll correctly
+- The hero headline "See your portfolio's real risk. Act on it." is visible
+- Stats bar visible at bottom: £5-30K, £14.4K/yr, 15-25%, 2 days
+- The user is logged in (shows "Dashboard" button instead of "Sign in")
+
+Issues to verify:
+- The DashboardNav sidebar "Settings" link goes to /pricing route (the separate pricing page)
+- This is the issue the user reported - when logged in and clicking "Pricing" from the sidebar, it goes to the /pricing route which loads the full Pricing page
+- The landing page nav correctly uses #pricing anchor links
+- Need to verify the PropertyDetailModal compiles correctly

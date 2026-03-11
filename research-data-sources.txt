@@ -1,0 +1,19 @@
+Additional UK Property Data Sources Beyond EPC:
+
+1. HM Land Registry Open Data - Free API for property ownership, sold prices, title info
+   URL: https://landregistry.data.gov.uk/
+   
+2. Environment Agency Flood Risk API - Free real-time flood monitoring and risk data
+   URL: https://environment.data.gov.uk/flood-monitoring/doc/reference
+   
+3. Planning Data (planning.data.gov.uk) - Free planning applications and constraints
+   URL: https://www.planning.data.gov.uk/
+
+4. BREEAM ratings - Alternative sustainability certification for commercial property
+
+5. Building Safety Act compliance data
+
+6. Conservation area / listed building status
+
+These can be mentioned on the landing page as additional intelligence layers.
+For the product, we can integrate: EPC + Flood Risk + Land Registry + Planning Data.

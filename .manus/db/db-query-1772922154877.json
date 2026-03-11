@@ -1,0 +1,140 @@
+{
+  "query": "SELECT id, name, postcode FROM properties ORDER BY id;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway04.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 2ywKgUCAusN5TAm.root --database 9MBqjC5D3uHivAp33CthKN --execute SELECT id, name, postcode FROM properties ORDER BY id;",
+  "rows": [
+    {
+      "id": "1",
+      "name": "Updated Property Name",
+      "postcode": "E14 5AB"
+    },
+    {
+      "id": "2",
+      "name": "Westfield Shopping Centre",
+      "postcode": "EC1V 2NX"
+    },
+    {
+      "id": "3",
+      "name": "Manchester Business Park",
+      "postcode": "M12 6HS"
+    },
+    {
+      "id": "4",
+      "name": "Bristol Warehouse Complex",
+      "postcode": "BS32 4QR"
+    },
+    {
+      "id": "5",
+      "name": "Edinburgh Financial District",
+      "postcode": "EH2 2BD"
+    },
+    {
+      "id": "6",
+      "name": "Leeds Retail Park",
+      "postcode": "LS11 8LU"
+    },
+    {
+      "id": "7",
+      "name": "Birmingham Mixed-Use Development",
+      "postcode": "B5 4BU"
+    },
+    {
+      "id": "8",
+      "name": "Glasgow Industrial Hub",
+      "postcode": "G52 4UZ"
+    },
+    {
+      "id": "9",
+      "name": "Southampton Logistics Centre",
+      "postcode": "SO15 1AG"
+    },
+    {
+      "id": "10",
+      "name": "Newcastle Office Campus",
+      "postcode": "NE1 2HA"
+    },
+    {
+      "id": "11",
+      "name": "Cambridge Tech Park",
+      "postcode": "CB4 0WZ"
+    },
+    {
+      "id": "12",
+      "name": "Liverpool Retail Quarter",
+      "postcode": "L1 4EL"
+    },
+    {
+      "id": "30001",
+      "name": "Test Property",
+      "postcode": "NULL"
+    },
+    {
+      "id": "30002",
+      "name": "Property to Delete",
+      "postcode": "NULL"
+    },
+    {
+      "id": "60001",
+      "name": "Test Property",
+      "postcode": "NULL"
+    },
+    {
+      "id": "60002",
+      "name": "Property to Delete",
+      "postcode": "NULL"
+    },
+    {
+      "id": "90001",
+      "name": "Selfridges",
+      "postcode": "NULL"
+    },
+    {
+      "id": "90002",
+      "name": "Test Property",
+      "postcode": "NULL"
+    },
+    {
+      "id": "90003",
+      "name": "Property to Delete",
+      "postcode": "NULL"
+    },
+    {
+      "id": "90004",
+      "name": "Test Property",
+      "postcode": "NULL"
+    },
+    {
+      "id": "90005",
+      "name": "Property to Delete",
+      "postcode": "NULL"
+    },
+    {
+      "id": "90006",
+      "name": "Test Property",
+      "postcode": "NULL"
+    },
+    {
+      "id": "90007",
+      "name": "Property to Delete",
+      "postcode": "NULL"
+    },
+    {
+      "id": "120001",
+      "name": "Home",
+      "postcode": "W1U 3BE"
+    },
+    {
+      "id": "150001",
+      "name": "Test Property",
+      "postcode": "NULL"
+    },
+    {
+      "id": "150002",
+      "name": "Property to Delete",
+      "postcode": "NULL"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\tname\tpostcode\n1\tUpdated Property Name\tE14 5AB\n2\tWestfield Shopping Centre\tEC1V 2NX\n3\tManchester Business Park\tM12 6HS\n4\tBristol Warehouse Complex\tBS32 4QR\n5\tEdinburgh Financial District\tEH2 2BD\n6\tLeeds Retail Park\tLS11 8LU\n7\tBirmingham Mixed-Use Development\tB5 4BU\n8\tGlasgow Industrial Hub\tG52 4UZ\n9\tSouthampton Logistics Centre\tSO15 1AG\n10\tNewcastle Office Campus\tNE1 2HA\n11\tCambridge Tech Park\tCB4 0WZ\n12\tLiverpool Retail Quarter\tL1 4EL\n30001\tTest Property\tNULL\n30002\tProperty to Delete\tNULL\n60001\tTest Property\tNULL\n60002\tProperty to Delete\tNULL\n90001\tSelfridges\tNULL\n90002\tTest Property\tNULL\n90003\tProperty to Delete\tNULL\n90004\tTest Property\tNULL\n90005\tProperty to Delete\tNULL\n90006\tTest Property\tNULL\n90007\tProperty to Delete\tNULL\n120001\tHome\tW1U 3BE\n150001\tTest Property\tNULL\n150002\tProperty to Delete\tNULL\n",
+  "stderr": "",
+  "execution_time_ms": 344
+}

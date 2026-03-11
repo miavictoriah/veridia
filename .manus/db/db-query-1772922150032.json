@@ -1,0 +1,244 @@
+{
+  "query": "SELECT id, name, address, postcode, epcRating, riskLevel, estimatedRetrofitCost FROM properties ORDER BY id;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway04.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 2ywKgUCAusN5TAm.root --database 9MBqjC5D3uHivAp33CthKN --execute SELECT id, name, address, postcode, epcRating, riskLevel, estimatedRetrofitCost FROM properties ORDER BY id;",
+  "rows": [
+    {
+      "id": "1",
+      "name": "Updated Property Name",
+      "address": "1 Canada Square, London, E14 5AB",
+      "postcode": "E14 5AB",
+      "epcRating": "D",
+      "riskLevel": "medium",
+      "estimatedRetrofitCost": "2800000"
+    },
+    {
+      "id": "2",
+      "name": "Westfield Shopping Centre",
+      "address": "120 City Road, London, EC1V 2NX",
+      "postcode": "EC1V 2NX",
+      "epcRating": "C",
+      "riskLevel": "low",
+      "estimatedRetrofitCost": "450000"
+    },
+    {
+      "id": "3",
+      "name": "Manchester Business Park",
+      "address": "Stockport Road, Manchester, M12 6HS",
+      "postcode": "M12 6HS",
+      "epcRating": "E",
+      "riskLevel": "high",
+      "estimatedRetrofitCost": "3200000"
+    },
+    {
+      "id": "4",
+      "name": "Bristol Warehouse Complex",
+      "address": "Avon Valley Industrial Estate, Bristol, BS32 4QR",
+      "postcode": "BS32 4QR",
+      "epcRating": "F",
+      "riskLevel": "high",
+      "estimatedRetrofitCost": "1950000"
+    },
+    {
+      "id": "5",
+      "name": "Edinburgh Financial District",
+      "address": "St Andrew Square, Edinburgh, EH2 2BD",
+      "postcode": "EH2 2BD",
+      "epcRating": "B",
+      "riskLevel": "low",
+      "estimatedRetrofitCost": "120000"
+    },
+    {
+      "id": "6",
+      "name": "Leeds Retail Park",
+      "address": "White Rose Centre, Leeds, LS11 8LU",
+      "postcode": "LS11 8LU",
+      "epcRating": "D",
+      "riskLevel": "medium",
+      "estimatedRetrofitCost": "680000"
+    },
+    {
+      "id": "7",
+      "name": "Birmingham Mixed-Use Development",
+      "address": "Bullring District, Birmingham, B5 4BU",
+      "postcode": "B5 4BU",
+      "epcRating": "B",
+      "riskLevel": "low",
+      "estimatedRetrofitCost": "250000"
+    },
+    {
+      "id": "8",
+      "name": "Glasgow Industrial Hub",
+      "address": "Hillington Park, Glasgow, G52 4UZ",
+      "postcode": "G52 4UZ",
+      "epcRating": "E",
+      "riskLevel": "medium",
+      "estimatedRetrofitCost": "1420000"
+    },
+    {
+      "id": "9",
+      "name": "Southampton Logistics Centre",
+      "address": "Port Road, Southampton, SO15 1AG",
+      "postcode": "SO15 1AG",
+      "epcRating": "C",
+      "riskLevel": "low",
+      "estimatedRetrofitCost": "280000"
+    },
+    {
+      "id": "10",
+      "name": "Newcastle Office Campus",
+      "address": "Stephenson Quarter, Newcastle, NE1 2HA",
+      "postcode": "NE1 2HA",
+      "epcRating": "E",
+      "riskLevel": "high",
+      "estimatedRetrofitCost": "2650000"
+    },
+    {
+      "id": "11",
+      "name": "Cambridge Tech Park",
+      "address": "Silicon Fen, Cambridge, CB4 0WZ",
+      "postcode": "CB4 0WZ",
+      "epcRating": "A",
+      "riskLevel": "low",
+      "estimatedRetrofitCost": "50000"
+    },
+    {
+      "id": "12",
+      "name": "Liverpool Retail Quarter",
+      "address": "Bold Street, Liverpool, L1 4EL",
+      "postcode": "L1 4EL",
+      "epcRating": "D",
+      "riskLevel": "medium",
+      "estimatedRetrofitCost": "520000"
+    },
+    {
+      "id": "30001",
+      "name": "Test Property",
+      "address": "123 Test Street, London",
+      "postcode": "NULL",
+      "epcRating": "C",
+      "riskLevel": "low",
+      "estimatedRetrofitCost": "150000"
+    },
+    {
+      "id": "30002",
+      "name": "Property to Delete",
+      "address": "456 Delete Street, London",
+      "postcode": "NULL",
+      "epcRating": "D",
+      "riskLevel": "low",
+      "estimatedRetrofitCost": "200000"
+    },
+    {
+      "id": "60001",
+      "name": "Test Property",
+      "address": "123 Test Street, London",
+      "postcode": "NULL",
+      "epcRating": "C",
+      "riskLevel": "low",
+      "estimatedRetrofitCost": "150000"
+    },
+    {
+      "id": "60002",
+      "name": "Property to Delete",
+      "address": "456 Delete Street, London",
+      "postcode": "NULL",
+      "epcRating": "D",
+      "riskLevel": "low",
+      "estimatedRetrofitCost": "200000"
+    },
+    {
+      "id": "90001",
+      "name": "Selfridges",
+      "address": "400 Oxford Street, London W1A 1AB, United Kingdom",
+      "postcode": "NULL",
+      "epcRating": "C",
+      "riskLevel": "low",
+      "estimatedRetrofitCost": "0"
+    },
+    {
+      "id": "90002",
+      "name": "Test Property",
+      "address": "123 Test Street, London",
+      "postcode": "NULL",
+      "epcRating": "C",
+      "riskLevel": "low",
+      "estimatedRetrofitCost": "0"
+    },
+    {
+      "id": "90003",
+      "name": "Property to Delete",
+      "address": "456 Delete Street, London",
+      "postcode": "NULL",
+      "epcRating": "D",
+      "riskLevel": "low",
+      "estimatedRetrofitCost": "0"
+    },
+    {
+      "id": "90004",
+      "name": "Test Property",
+      "address": "123 Test Street, London",
+      "postcode": "NULL",
+      "epcRating": "C",
+      "riskLevel": "low",
+      "estimatedRetrofitCost": "0"
+    },
+    {
+      "id": "90005",
+      "name": "Property to Delete",
+      "address": "456 Delete Street, London",
+      "postcode": "NULL",
+      "epcRating": "D",
+      "riskLevel": "low",
+      "estimatedRetrofitCost": "0"
+    },
+    {
+      "id": "90006",
+      "name": "Test Property",
+      "address": "123 Test Street, London",
+      "postcode": "NULL",
+      "epcRating": "C",
+      "riskLevel": "low",
+      "estimatedRetrofitCost": "0"
+    },
+    {
+      "id": "90007",
+      "name": "Property to Delete",
+      "address": "456 Delete Street, London",
+      "postcode": "NULL",
+      "epcRating": "D",
+      "riskLevel": "low",
+      "estimatedRetrofitCost": "0"
+    },
+    {
+      "id": "120001",
+      "name": "Home",
+      "address": "16 hinde house",
+      "postcode": "W1U 3BE",
+      "epcRating": "NULL",
+      "riskLevel": "medium",
+      "estimatedRetrofitCost": "0"
+    },
+    {
+      "id": "150001",
+      "name": "Test Property",
+      "address": "123 Test Street, London",
+      "postcode": "NULL",
+      "epcRating": "C",
+      "riskLevel": "low",
+      "estimatedRetrofitCost": "0"
+    },
+    {
+      "id": "150002",
+      "name": "Property to Delete",
+      "address": "456 Delete Street, London",
+      "postcode": "NULL",
+      "epcRating": "D",
+      "riskLevel": "low",
+      "estimatedRetrofitCost": "0"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\tname\taddress\tpostcode\tepcRating\triskLevel\testimatedRetrofitCost\n1\tUpdated Property Name\t1 Canada Square, London, E14 5AB\tE14 5AB\tD\tmedium\t2800000\n2\tWestfield Shopping Centre\t120 City Road, London, EC1V 2NX\tEC1V 2NX\tC\tlow\t450000\n3\tManchester Business Park\tStockport Road, Manchester, M12 6HS\tM12 6HS\tE\thigh\t3200000\n4\tBristol Warehouse Complex\tAvon Valley Industrial Estate, Bristol, BS32 4QR\tBS32 4QR\tF\thigh\t1950000\n5\tEdinburgh Financial District\tSt Andrew Square, Edinburgh, EH2 2BD\tEH2 2BD\tB\tlow\t120000\n6\tLeeds Retail Park\tWhite Rose Centre, Leeds, LS11 8LU\tLS11 8LU\tD\tmedium\t680000\n7\tBirmingham Mixed-Use Development\tBullring District, Birmingham, B5 4BU\tB5 4BU\tB\tlow\t250000\n8\tGlasgow Industrial Hub\tHillington Park, Glasgow, G52 4UZ\tG52 4UZ\tE\tmedium\t1420000\n9\tSouthampton Logistics Centre\tPort Road, Southampton, SO15 1AG\tSO15 1AG\tC\tlow\t280000\n10\tNewcastle Office Campus\tStephenson Quarter, Newcastle, NE1 2HA\tNE1 2HA\tE\thigh\t2650000\n11\tCambridge Tech Park\tSilicon Fen, Cambridge, CB4 0WZ\tCB4 0WZ\tA\tlow\t50000\n12\tLiverpool Retail Quarter\tBold Street, Liverpool, L1 4EL\tL1 4EL\tD\tmedium\t520000\n30001\tTest Property\t123 Test Street, London\tNULL\tC\tlow\t150000\n30002\tProperty to Delete\t456 Delete Street, London\tNULL\tD\tlow\t200000\n60001\tTest Property\t123 Test Street, London\tNULL\tC\tlow\t150000\n60002\tProperty to Delete\t456 Delete Street, London\tNULL\tD\tlow\t200000\n90001\tSelfridges\t400 Oxford Street, London W1A 1AB, United Kingdom\tNULL\tC\tlow\t0\n90002\tTest Property\t123 Test Street, London\tNULL\tC\tlow\t0\n90003\tProperty to Delete\t456 Delete Street, London\tNULL\tD\tlow\t0\n90004\tTest Property\t123 Test Street, London\tNULL\tC\tlow\t0\n90005\tProperty to Delete\t456 Delete Street, London\tNULL\tD\tlow\t0\n90006\tTest Property\t123 Test Street, London\tNULL\tC\tlow\t0\n90007\tProperty to Delete\t456 Delete Street, London\tNULL\tD\tlow\t0\n120001\tHome\t16 hinde house\tW1U 3BE\tNULL\tmedium\t0\n150001\tTest Property\t123 Test Street, London\tNULL\tC\tlow\t0\n150002\tProperty to Delete\t456 Delete Street, London\tNULL\tD\tlow\t0\n",
+  "stderr": "",
+  "execution_time_ms": 455
+}

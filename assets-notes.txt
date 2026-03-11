@@ -1,0 +1,21 @@
+Assets page observations:
+- Real UK properties showing: Selfridges (W1A 1AB), One Canada Square (E14 5AB), Arndale Centre (M4 3AH), The Shard (SE1 9SG), etc.
+- 12 properties total, 4 high risk, avg risk 53/100
+- Each property has Details, Refresh, Delete buttons
+- Property cards are clickable (cursor-pointer added)
+- Need to test the Details button to see if PropertyDetailModal opens
+- Retrofit costs look reasonable: Selfridges £3200K, One Canada Square £4500K, Arndale £5800K
+- No more "property to delete" entries visible
+- Mix of retail, office, industrial, mixed_use types
+
+
+Bottom of assets page:
+- Hillington Park Industrial Estate (F, G52 4BL, 88/100, Non Compliant, £3400K, Fail)
+- Ocean Terminal (C, EH6 6JJ, 30/100, Compliant, £350K, Pass)
+- Baltic Triangle Warehouse (E, L1 0AF, 78/100, Non Compliant, £1850K, Fail)
+- Cambridge Science Park (A, CB4 0FW, 12/100, Compliant, £45K, Pass)
+- Royal Liver Building (E, L3 1HU, 75/100, At Risk, £2200K, Fail)
+
+No "property to delete" entries anywhere. All 12 properties are real UK landmarks with actual postcodes. Good mix of retail, office, industrial, mixed_use. Retrofit costs look reasonable for the property types and sizes.
+
+Retrofit cost issue: Selfridges shows £3200K which is £3.2M - this is reasonable for a Grade II* listed department store HVAC modernisation. The user's original complaint about "£2800K" was about the old data format. Now the PropertyDetailModal shows it as "£3.2M" which is clearer.

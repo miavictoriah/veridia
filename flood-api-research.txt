@@ -1,0 +1,25 @@
+Flood Risk API Research:
+
+1. Environment Agency Flood Monitoring API (environment.data.gov.uk) - currently 503 error, but provides real-time flood warnings and alerts
+2. Gov.uk Long Term Flood Risk service (check-long-term-flood-risk.service.gov.uk) - postcode-based lookup
+3. Flood Map for Planning (flood-map-for-planning.service.gov.uk) - planning-focused flood zones
+4. PropertyData API (propertydata.co.uk) - commercial, paid
+5. PropEco Flood Risk API - commercial
+6. GitHub flood-risk project (djtarrant/flood-risk) - open source postcode lookup
+
+For the demo, the best approach is:
+- Use the Environment Agency's flood monitoring API for real-time data when available
+- For demo properties, populate with accurate flood zone data based on known locations
+- The EA API endpoint pattern: https://environment.data.gov.uk/flood-monitoring/id/floods?lat=X&long=Y
+- For flood warnings: https://environment.data.gov.uk/flood-monitoring/id/floods
+
+For the actual product, we should integrate:
+1. EA Flood Risk API for flood zones (free, government data)
+2. Land Registry API (HM Land Registry) for ownership data
+3. Planning API from local authorities
+
+Since the EA API is currently down (503), I'll:
+- Add flood risk fields to the schema
+- Populate demo properties with accurate flood zone data for their real locations
+- Create a server-side function that will call the EA API when available
+- For now, use known flood zone data for the demo postcodes

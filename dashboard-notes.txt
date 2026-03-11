@@ -1,0 +1,12 @@
+Dashboard screenshot observations:
+- Dashboard looks clean with Veridia branding
+- 12 properties, 4 high risk, 3 non-lettable, 75% compliance
+- Risk distribution pie chart working (4 high, 3 medium, 5 low)
+- 5-Year Capex Forecast chart now has proper Y-axis labels (£22.0M, £16.5M, £11.0M, £5.5M, £0) and X-axis (2025-2029) with "Year" label and "Spend (GBP)" label
+- EPC Rating Breakdown showing A=1, B=1, C=3, D=3, E=3
+- Market Comparison showing Your Avg EPC: D, Market Avg: C, Compliance 42% vs 82%
+- Sidebar has 5 items: Portfolio, Properties, Compliance, Reports, Settings
+- Settings link goes to /pricing route - this is the issue user reported
+- The sidebar "Settings" label with "Plan & preferences" description links to /pricing
+
+The issue: When user clicks "Settings" (which was labeled as pricing) in the sidebar, it goes to /pricing page which is a full separate pricing page. The user wants pricing to be on the landing page only, not a separate dashboard page. The Settings nav item should either be renamed or link somewhere else.
