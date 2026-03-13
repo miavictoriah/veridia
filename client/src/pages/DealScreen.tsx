@@ -77,24 +77,33 @@ export default function DealScreen() {
     postcode: string,
     address: string
   ): Promise<{ assetType: DealFormData["assetType"]; epcRating: DealFormData["epcRating"] } | null> => {
-    const result = await epcLookup.refetch({ throwOnError: false, cancelRefetch: false, meta: undefined, queryKey: undefined, exact: undefined, type: undefined, stale: undefined, predicate: undefined, originalFn: undefined, context: undefined, queryHash: undefined, fetchStatus: undefined, state: undefined, metaInfo: undefined, listeners: undefined, defaultOptions: undefined, queryKeyHashFn: undefined, options: { queryFn: undefined, queryKey: undefined } } as any);
-    const data = result.data as any[] | undefined;
-    if (!data || data.length === 0) {
+    try {
+      const clean = postcode.replace(/\s+/g, "").toUpperCase();
+      const formatted = clean.slice(0, -3) + " " + clean.slice(-3);
+      const response = await fetch(
+        `https://epc.opendatacommunities.org/api/v1/domestic/search?postcode=${encodeURIComponent(formatted)}&size=1`,
+        {
+          headers: {
+            "Accept": "application/json",
+            "Authorization": "Basic " + btoa("Mia.hildebrandt@icloud.com:221a0eb3f8247a2de3004cd6071fa654bc7af566")
+          }
+        }
+      );
+      if (!response.ok) return null;
+      const data = await response.json();
+      const rows = data.rows;
+      if (!rows || rows.length === 0) return null;
+      const cert = rows[0];
+      return {
+        assetType: mapAssetType(cert["property-type"] || ""),
+        epcRating: mapRatingBand(cert["current-energy-rating"] || ""),
+      };
+    } catch (error) {
+      console.error("EPC fetch error:", error);
       return null;
     }
-    const certificate = data[0];
-    const rawAssetType = (certificate.propertyType ?? "") as string;
-    const rawBand = (certificate.epcRating ?? "") as string;
-    if (!rawAssetType && !rawBand) {
-      return null;
-    }
-    return {
-      assetType: mapAssetType(rawAssetType),
-      epcRating: mapRatingBand(rawBand),
-    };
   };
-
-  const calculateStrandedAssetRisk = (data: DealFormData): DealResult => {
+    const calculateStrandedAssetRisk = (data: DealFormData): DealResult => {
     // EPC rating to numeric score (A=0, G=100)
     const epcScores: Record<string, number> = {
       A: 0,
