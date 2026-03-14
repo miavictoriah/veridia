@@ -418,6 +418,61 @@ function addressSimilarity(a: string, b: string): number {
  * Look up EPC data by postcode
  * Returns all certificates found for the given postcode
  */
+export async function lookupEPCByPostcodeNonDomestic(postcode: string): Promise<EPCCertificate[]> {
+  try {
+    const clean = postcode.replace(/\s+/g, "").toUpperCase();
+    const formatted = clean.slice(0, -3) + " " + clean.slice(-3);
+    const email = process.env.EPC_EMAIL || "";
+    const apiKey = process.env.EPC_API_KEY || "";
+    const auth = Buffer.from(`${email}:${apiKey}`).toString("base64");
+    
+    const response = await fetch(
+      `https://epc.opendatacommunities.org/api/v1/non-domestic/search?postcode=${encodeURIComponent(formatted)}&size=10`,
+      {
+        headers: {
+          "Accept": "application/json",
+          "Authorization": `Basic ${auth}`
+        }
+      }
+    );
+    
+    if (!response.ok) {
+      console.log("Non-domestic EPC API error:", response.status);
+      return [];
+    }
+    
+    const data = await response.json();
+    const rows = data.rows || [];
+    
+    return rows.map((row: any) => ({
+      address: row["address1"] || "",
+      postcode: formatted,
+      epcRating: row["asset-rating-band"] || "Unknown",
+      epcScore: parseInt(row["asset-rating"] || "0"),
+      potentialRating: row["asset-rating-band"] || "Unknown",
+      potentialScore: parseInt(row["asset-rating"] || "0"),
+      propertyType: row["property-type"] || "Commercial",
+      builtForm: row["property-type"] || "Commercial",
+      floorArea: parseFloat(row["floor-area"] || "0"),
+      energyCostsAnnual: 0,
+      co2Emissions: parseFloat(row["annual-co2-emissions"] || "0"),
+      certificateNumber: row["lmk-key"] || "",
+      inspectionDate: row["inspection-date"] || "",
+      expiryDate: row["nominated-date"] || "",
+      recommendations: [],
+      totalUpgradeCost: 0,
+      wallDescription: "",
+      roofDescription: "",
+      windowDescription: "",
+      heatingDescription: "",
+      hotWaterDescription: "",
+    }));
+  } catch (error) {
+    console.error("Non-domestic EPC lookup error:", error);
+    return [];
+  }
+}
+
 export async function lookupEPCByPostcode(postcode: string): Promise<EPCCertificate[]> {
   try {
     const searchResults = await searchByPostcode(postcode);

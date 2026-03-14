@@ -46,10 +46,13 @@ async function startServer() {
   // EPC lookup endpoint
   app.get("/api/epc", async (req, res) => {
     try {
-      const { lookupEPCByPostcode } = await import("../epcApi.js");
+      const { lookupEPCByPostcode, lookupEPCByPostcodeNonDomestic } = await import("../epcApi.js");
       const postcode = req.query.postcode as string;
       if (!postcode) return res.json([]);
-      const results = await lookupEPCByPostcode(postcode);
+      let results = await lookupEPCByPostcodeNonDomestic(postcode);
+      if (!results || results.length === 0) {
+        results = await lookupEPCByPostcode(postcode);
+      }
       res.json(results);
     } catch (e) {
       console.error("EPC route error:", e);
