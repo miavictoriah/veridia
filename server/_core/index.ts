@@ -43,6 +43,20 @@ async function startServer() {
       createContext,
     })
   );
+  // EPC lookup endpoint
+  app.get("/api/epc", async (req, res) => {
+    try {
+      const { lookupEPCByPostcode } = await import("../epcApi.js");
+      const postcode = req.query.postcode as string;
+      if (!postcode) return res.json([]);
+      const results = await lookupEPCByPostcode(postcode);
+      res.json(results);
+    } catch (e) {
+      console.error("EPC route error:", e);
+      res.json([]);
+    }
+  });
+
   // development mode uses Vite, production mode uses static files
   if (process.env.NODE_ENV === "development") {
     await setupVite(app, server);

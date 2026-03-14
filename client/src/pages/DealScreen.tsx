@@ -78,25 +78,14 @@ export default function DealScreen() {
     address: string
   ): Promise<{ assetType: DealFormData["assetType"]; epcRating: DealFormData["epcRating"] } | null> => {
     try {
-      const clean = postcode.replace(/\s+/g, "").toUpperCase();
-      const formatted = clean.slice(0, -3) + " " + clean.slice(-3);
-      const response = await fetch(
-        `https://epc.opendatacommunities.org/api/v1/domestic/search?postcode=${encodeURIComponent(formatted)}&size=1`,
-        {
-          headers: {
-            "Accept": "application/json",
-            "Authorization": "Basic " + btoa("Mia.hildebrandt@icloud.com:221a0eb3f8247a2de3004cd6071fa654bc7af566")
-          }
-        }
-      );
+      const response = await fetch(`/api/epc?postcode=${encodeURIComponent(postcode)}`);
       if (!response.ok) return null;
       const data = await response.json();
-      const rows = data.rows;
-      if (!rows || rows.length === 0) return null;
-      const cert = rows[0];
+      if (!data || data.length === 0) return null;
+      const cert = data[0];
       return {
-        assetType: mapAssetType(cert["property-type"] || ""),
-        epcRating: mapRatingBand(cert["current-energy-rating"] || ""),
+        assetType: mapAssetType(cert.propertyType || ""),
+        epcRating: mapRatingBand(cert.epcRating || ""),
       };
     } catch (error) {
       console.error("EPC fetch error:", error);
