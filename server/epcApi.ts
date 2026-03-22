@@ -422,8 +422,8 @@ export async function lookupEPCByPostcodeNonDomestic(postcode: string): Promise<
   try {
     const clean = postcode.replace(/\s+/g, "").toUpperCase();
     const formatted = clean.slice(0, -3) + " " + clean.slice(-3);
-    const email = process.env.EPC_EMAIL || "";
-    const apiKey = process.env.EPC_API_KEY || "";
+    const email = process.env.EPC_EMAIL || "mia.hildebrandt@icloud.com";
+    const apiKey = process.env.EPC_API_KEY || "221a0eb3f8247a2de3004cd6071fa654bc7af566";
     const auth = Buffer.from(`${email}:${apiKey}`).toString("base64");
     
     const response = await fetch(
