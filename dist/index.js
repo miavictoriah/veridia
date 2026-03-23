@@ -274,7 +274,7 @@ async function lookupEPCByPostcodeNonDomestic(postcode) {
   try {
     const clean = postcode.replace(/\s+/g, "").toUpperCase();
     const formatted = clean.slice(0, -3) + " " + clean.slice(-3);
-    const token = process.env.EPC_BEARER_TOKEN || "ChBGhlnWUhH2bgaYjBOWrEwEuaZOyOpUqqZo3cHzrazh9BDmMwHZ5S6MXknlNgWv";
+    const token = process.env.EPC_BEARER_TOKEN || "";
     const response = await fetch(
       `https://api.get-energy-performance-data.communities.gov.uk/api/non-domestic/search?postcode=${encodeURIComponent(formatted)}`,
       {
