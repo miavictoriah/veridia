@@ -2111,6 +2111,42 @@ async function startServer() {
       createContext
     })
   );
+  app.post("/api/signup", async (req, res) => {
+    try {
+      const { name, email, company } = req.body;
+      if (!name || !email) return res.status(400).json({ error: "Name and email required" });
+      const { Resend } = await import("resend");
+      const resend = new Resend(process.env.RESEND_API_KEY || "re_8XondN7D_EDeTswagEfdnVFc2XFcRbbFH");
+      await resend.emails.send({
+        from: "Veridia <onboarding@resend.dev>",
+        to: "mia.hildebrandt@icloud.com",
+        subject: "New Veridia Free Trial Signup",
+        html: `<h2>New signup!</h2><p><strong>Name:</strong> ${name}</p><p><strong>Email:</strong> ${email}</p><p><strong>Company:</strong> ${company || "Not provided"}</p>`
+      });
+      res.json({ success: true });
+    } catch (e) {
+      console.error("Signup error:", e);
+      res.status(500).json({ error: "Signup failed" });
+    }
+  });
+  app.post("/api/signup", async (req, res) => {
+    try {
+      const { name, email, company } = req.body;
+      if (!name || !email) return res.status(400).json({ error: "Name and email required" });
+      const { Resend } = await import("resend");
+      const resend = new Resend(process.env.RESEND_API_KEY || "re_8XondN7D_EDeTswagEfdnVFc2XFcRbbFH");
+      await resend.emails.send({
+        from: "Veridia <onboarding@resend.dev>",
+        to: "mia.hildebrandt@icloud.com",
+        subject: "New Veridia Free Trial Signup",
+        html: `<h2>New signup!</h2><p><strong>Name:</strong> ${name}</p><p><strong>Email:</strong> ${email}</p><p><strong>Company:</strong> ${company || "Not provided"}</p>`
+      });
+      res.json({ success: true });
+    } catch (e) {
+      console.error("Signup error:", e);
+      res.status(500).json({ error: "Signup failed" });
+    }
+  });
   app.get("/api/epc", async (req, res) => {
     try {
       const { lookupEPCByPostcode: lookupEPCByPostcode2, lookupEPCByPostcodeNonDomestic: lookupEPCByPostcodeNonDomestic2 } = await Promise.resolve().then(() => (init_epcApi(), epcApi_exports));

@@ -1,6 +1,25 @@
+import React from "react";
 import { Button } from "@/components/ui/button";
 
 export default function Home() {
+  const [signupForm, setSignupForm] = React.useState({ name: "", email: "", company: "" });
+  const [signupState, setSignupState] = React.useState<"idle" | "loading" | "success" | "error">("idle");
+
+  const handleSignup = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setSignupState("loading");
+    try {
+      const res = await fetch("/api/signup", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(signupForm)
+      });
+      if (res.ok) setSignupState("success");
+      else setSignupState("error");
+    } catch {
+      setSignupState("error");
+    }
+  };
   return (
     <div className="min-h-screen bg-white">
       <header className="sticky top-0 z-50 border-b border-gray-100 bg-white/85 backdrop-blur">
