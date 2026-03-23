@@ -2,24 +2,6 @@ import React from "react";
 import { Button } from "@/components/ui/button";
 
 export default function Home() {
-  const [signupForm, setSignupForm] = React.useState({ name: "", email: "", company: "" });
-  const [signupState, setSignupState] = React.useState<"idle" | "loading" | "success" | "error">("idle");
-
-  const handleSignup = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setSignupState("loading");
-    try {
-      const res = await fetch("/api/signup", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(signupForm)
-      });
-      if (res.ok) setSignupState("success");
-      else setSignupState("error");
-    } catch {
-      setSignupState("error");
-    }
-  };
   return (
     <div className="min-h-screen bg-white">
       <header className="sticky top-0 z-50 border-b border-gray-100 bg-white/85 backdrop-blur">
@@ -66,19 +48,13 @@ export default function Home() {
               </p>
 
               <div className="mt-10">
-                {signupState === "success" ? (
-                  <div className="rounded-lg border border-[#00C9A7]/40 bg-[#00C9A7]/10 px-6 py-4 text-[#00C9A7] font-medium">
-                    You are on the list! We will be in touch shortly.
-                  </div>
-                ) : (
-                  <form onSubmit={handleSignup} className="flex flex-col gap-3 sm:flex-row sm:items-center">
-                    <input type="text" placeholder="Your name" required value={signupForm.name} onChange={e => setSignupForm(f => ({ ...f, name: e.target.value }))} className="h-11 rounded-lg border border-white/20 bg-white/10 px-4 text-[13px] text-white placeholder-white/50 outline-none focus:border-[#00C9A7]" />
-                    <input type="email" placeholder="Work email" required value={signupForm.email} onChange={e => setSignupForm(f => ({ ...f, email: e.target.value }))} className="h-11 rounded-lg border border-white/20 bg-white/10 px-4 text-[13px] text-white placeholder-white/50 outline-none focus:border-[#00C9A7]" />
-                    <input type="text" placeholder="Company (optional)" value={signupForm.company} onChange={e => setSignupForm(f => ({ ...f, company: e.target.value }))} className="h-11 rounded-lg border border-white/20 bg-white/10 px-4 text-[13px] text-white placeholder-white/50 outline-none focus:border-[#00C9A7]" />
-                    <button type="submit" disabled={signupState === "loading"} className="h-11 rounded-lg px-6 text-[13px] font-semibold text-white whitespace-nowrap" style={{ backgroundColor: "#00C9A7" }}>{signupState === "loading" ? "Sending..." : "Start Free Trial"}</button>
-                  </form>
-                )}
-                <p className="mt-3 text-[12px] text-white/40">7-day free trial - No credit card required</p>
+                <Button
+                  asChild
+                  className="h-11 rounded-lg px-6 text-[13px] font-semibold text-white whitespace-nowrap"
+                  style={{ backgroundColor: "#00C9A7" }}
+                >
+                  <a href="/deal-screen">Start Screening</a>
+                </Button>
               </div>
 
               <div className="mt-12 grid gap-4 border-t border-white/10 pt-10 md:grid-cols-3">
