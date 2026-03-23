@@ -2,6 +2,25 @@ import React from "react";
 import { Button } from "@/components/ui/button";
 
 export default function Home() {
+  const [email, setEmail] = React.useState("");
+  const [submitting, setSubmitting] = React.useState(false);
+
+  const handleSignup = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setSubmitting(true);
+    try {
+      await fetch("/api/signup", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+    } catch {
+      // Intentionally ignore failures and continue to product.
+    } finally {
+      window.location.href = "/deal-screen";
+    }
+  };
+
   return (
     <div className="min-h-screen bg-white">
       <header className="sticky top-0 z-50 border-b border-gray-100 bg-white/85 backdrop-blur">
@@ -48,13 +67,24 @@ export default function Home() {
               </p>
 
               <div className="mt-10">
-                <Button
-                  asChild
-                  className="h-11 rounded-lg px-6 text-[13px] font-semibold text-white whitespace-nowrap"
-                  style={{ backgroundColor: "#00C9A7" }}
-                >
-                  <a href="/deal-screen">Start Screening</a>
-                </Button>
+                <form onSubmit={handleSignup} className="flex flex-col gap-3 sm:flex-row sm:items-center">
+                  <input
+                    type="email"
+                    placeholder="Work email"
+                    required
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className="h-11 rounded-lg border border-white/20 bg-white/10 px-4 text-[13px] text-white placeholder-white/50 outline-none focus:border-[#00C9A7]"
+                  />
+                  <Button
+                    type="submit"
+                    disabled={submitting}
+                    className="h-11 rounded-lg px-6 text-[13px] font-semibold text-white whitespace-nowrap"
+                    style={{ backgroundColor: "#00C9A7" }}
+                  >
+                    {submitting ? "Starting..." : "Start Screening"}
+                  </Button>
+                </form>
               </div>
 
               <div className="mt-12 grid gap-4 border-t border-white/10 pt-10 md:grid-cols-3">
