@@ -65,14 +65,20 @@ export default function Home() {
                 Veridia screens UK commercial properties for MEES compliance, retrofit capex, and regulatory risk. Built for lenders and acquisition teams.
               </p>
 
-              <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center">
-                <a
-                  href="/deal-screen"
-                  className="inline-flex h-11 items-center rounded-lg px-6 text-[13px] font-semibold text-white"
-                  style={{ backgroundColor: "#00C9A7" }}
-                >
-                  Screen a Property
-                </a>
+              <div className="mt-10">
+                {signupState === "success" ? (
+                  <div className="rounded-lg border border-[#00C9A7]/40 bg-[#00C9A7]/10 px-6 py-4 text-[#00C9A7] font-medium">
+                    You are on the list! We will be in touch shortly.
+                  </div>
+                ) : (
+                  <form onSubmit={handleSignup} className="flex flex-col gap-3 sm:flex-row sm:items-center">
+                    <input type="text" placeholder="Your name" required value={signupForm.name} onChange={e => setSignupForm(f => ({ ...f, name: e.target.value }))} className="h-11 rounded-lg border border-white/20 bg-white/10 px-4 text-[13px] text-white placeholder-white/50 outline-none focus:border-[#00C9A7]" />
+                    <input type="email" placeholder="Work email" required value={signupForm.email} onChange={e => setSignupForm(f => ({ ...f, email: e.target.value }))} className="h-11 rounded-lg border border-white/20 bg-white/10 px-4 text-[13px] text-white placeholder-white/50 outline-none focus:border-[#00C9A7]" />
+                    <input type="text" placeholder="Company (optional)" value={signupForm.company} onChange={e => setSignupForm(f => ({ ...f, company: e.target.value }))} className="h-11 rounded-lg border border-white/20 bg-white/10 px-4 text-[13px] text-white placeholder-white/50 outline-none focus:border-[#00C9A7]" />
+                    <button type="submit" disabled={signupState === "loading"} className="h-11 rounded-lg px-6 text-[13px] font-semibold text-white whitespace-nowrap" style={{ backgroundColor: "#00C9A7" }}>{signupState === "loading" ? "Sending..." : "Start Free Trial"}</button>
+                  </form>
+                )}
+                <p className="mt-3 text-[12px] text-white/40">7-day free trial - No credit card required</p>
               </div>
 
               <div className="mt-12 grid gap-4 border-t border-white/10 pt-10 md:grid-cols-3">
