@@ -274,15 +274,13 @@ async function lookupEPCByPostcodeNonDomestic(postcode) {
   try {
     const clean = postcode.replace(/\s+/g, "").toUpperCase();
     const formatted = clean.slice(0, -3) + " " + clean.slice(-3);
-    const email = process.env.EPC_EMAIL || "mia.hildebrandt@icloud.com";
-    const apiKey = process.env.EPC_API_KEY || "221a0eb3f8247a2de3004cd6071fa654bc7af566";
-    const auth = Buffer.from(`${email}:${apiKey}`).toString("base64");
+    const token = process.env.EPC_BEARER_TOKEN || "ChBGhlnWUhH2bgaYjBOWrEwEuaZOyOpUqqZo3cHzrazh9BDmMwHZ5S6MXknlNgWv";
     const response = await fetch(
-      `https://epc.opendatacommunities.org/api/v1/non-domestic/search?postcode=${encodeURIComponent(formatted)}&size=10`,
+      `https://api.get-energy-performance-data.communities.gov.uk/api/non-domestic/search?postcode=${encodeURIComponent(formatted)}`,
       {
         headers: {
           "Accept": "application/json",
-          "Authorization": `Basic ${auth}`
+          "Authorization": `Bearer ${token}`
         }
       }
     );
@@ -291,22 +289,22 @@ async function lookupEPCByPostcodeNonDomestic(postcode) {
       return [];
     }
     const data = await response.json();
-    const rows = data.rows || [];
+    const rows = data.data || [];
     return rows.map((row) => ({
-      address: row["address1"] || "",
+      address: row.addressLine1 || "",
       postcode: formatted,
-      epcRating: row["asset-rating-band"] || "Unknown",
-      epcScore: parseInt(row["asset-rating"] || "0"),
-      potentialRating: row["asset-rating-band"] || "Unknown",
-      potentialScore: parseInt(row["asset-rating"] || "0"),
-      propertyType: row["property-type"] || "Commercial",
-      builtForm: row["property-type"] || "Commercial",
-      floorArea: parseFloat(row["floor-area"] || "0"),
+      epcRating: row.currentEnergyEfficiencyBand || "Unknown",
+      epcScore: 0,
+      potentialRating: row.currentEnergyEfficiencyBand || "Unknown",
+      potentialScore: 0,
+      propertyType: "Commercial",
+      builtForm: "Commercial",
+      floorArea: 0,
       energyCostsAnnual: 0,
-      co2Emissions: parseFloat(row["annual-co2-emissions"] || "0"),
-      certificateNumber: row["lmk-key"] || "",
-      inspectionDate: row["inspection-date"] || "",
-      expiryDate: row["nominated-date"] || "",
+      co2Emissions: 0,
+      certificateNumber: row.certificateNumber || "",
+      inspectionDate: row.registrationDate || "",
+      expiryDate: "",
       recommendations: [],
       totalUpgradeCost: 0,
       wallDescription: "",
