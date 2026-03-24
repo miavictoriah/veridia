@@ -63,8 +63,8 @@ async function startServer() {
           await resend.emails.send({
             from: "Veridia <onboarding@resend.dev>",
             to: email,
-            subject: "Your Veridia access is ready",
-            html: `<p>You can now start screening UK commercial properties instantly.</p><p><a href="https://veridiascore.com/deal-screen">https://veridiascore.com/deal-screen</a></p>`,
+            subject: "Your Veridia access is live",
+            html: `<p>You now have access to Veridia.</p><p>Screen UK commercial properties for EPC, MEES compliance, retrofit capex and risk in seconds.</p><p><a href="https://veridiascore.com/deal-screen">https://veridiascore.com/deal-screen</a></p><p>If you have any questions, reply to this email.</p>`,
           });
         }
         console.log("Email sent successfully");
@@ -99,8 +99,8 @@ async function startServer() {
           await resend.emails.send({
             from: "Veridia <onboarding@resend.dev>",
             to: email,
-            subject: "Your Veridia access is ready",
-            html: `<p>You can now start screening UK commercial properties instantly.</p><p><a href="https://veridiascore.com/deal-screen">https://veridiascore.com/deal-screen</a></p>`,
+            subject: "Your Veridia access is live",
+            html: `<p>You now have access to Veridia.</p><p>Screen UK commercial properties for EPC, MEES compliance, retrofit capex and risk in seconds.</p><p><a href="https://veridiascore.com/deal-screen">https://veridiascore.com/deal-screen</a></p><p>If you have any questions, reply to this email.</p>`,
           });
         }
         console.log("Email sent successfully");
