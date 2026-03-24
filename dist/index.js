@@ -2119,7 +2119,7 @@ async function startServer() {
       const resend = new Resend(process.env.RESEND_API_KEY || "re_8XondN7D_EDeTswagEfdnVFc2XFcRbbFH");
       try {
         await resend.emails.send({
-          from: "Veridia <onboarding@resend.dev>",
+          from: "Veridia <hello@veridiascore.com>",
           to: "mia.hildebrandt@icloud.com",
           subject: "New Veridia Free Trial Signup",
           html: `<h2>New signup!</h2><p><strong>Name:</strong> ${name || "Not provided"}</p><p><strong>Email:</strong> ${email || "Not provided"}</p><p><strong>Company:</strong> ${company || "Not provided"}</p>`
@@ -2142,7 +2142,7 @@ async function startServer() {
       const resend = new Resend(process.env.RESEND_API_KEY || "re_8XondN7D_EDeTswagEfdnVFc2XFcRbbFH");
       try {
         await resend.emails.send({
-          from: "Veridia <onboarding@resend.dev>",
+          from: "Veridia <hello@veridiascore.com>",
           to: "mia.hildebrandt@icloud.com",
           subject: "New Veridia Free Trial Signup",
           html: `<h2>New signup!</h2><p><strong>Name:</strong> ${name || "Not provided"}</p><p><strong>Email:</strong> ${email || "Not provided"}</p><p><strong>Company:</strong> ${company || "Not provided"}</p>`
