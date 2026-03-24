@@ -54,11 +54,19 @@ async function startServer() {
 
       try {
         await resend.emails.send({
-          from: "Veridia <hello@veridiascore.com>",
+          from: "Veridia <onboarding@resend.dev>",
           to: "mia.hildebrandt@icloud.com",
           subject: "New Veridia Free Trial Signup",
           html: `<h2>New signup!</h2><p><strong>Name:</strong> ${name || "Not provided"}</p><p><strong>Email:</strong> ${email || "Not provided"}</p><p><strong>Company:</strong> ${company || "Not provided"}</p>`
         });
+        if (email) {
+          await resend.emails.send({
+            from: "Veridia <onboarding@resend.dev>",
+            to: email,
+            subject: "Your Veridia access is ready",
+            html: `<p>You can now start screening UK commercial properties instantly.</p><p><a href="https://veridiascore.com/deal-screen">https://veridiascore.com/deal-screen</a></p>`,
+          });
+        }
         console.log("Email sent successfully");
       } catch (error) {
         console.error(`Email failed: ${error instanceof Error ? error.message : String(error)}`);
@@ -82,11 +90,19 @@ async function startServer() {
 
       try {
         await resend.emails.send({
-          from: "Veridia <hello@veridiascore.com>",
+          from: "Veridia <onboarding@resend.dev>",
           to: "mia.hildebrandt@icloud.com",
           subject: "New Veridia Free Trial Signup",
           html: `<h2>New signup!</h2><p><strong>Name:</strong> ${name || "Not provided"}</p><p><strong>Email:</strong> ${email || "Not provided"}</p><p><strong>Company:</strong> ${company || "Not provided"}</p>`
         });
+        if (email) {
+          await resend.emails.send({
+            from: "Veridia <onboarding@resend.dev>",
+            to: email,
+            subject: "Your Veridia access is ready",
+            html: `<p>You can now start screening UK commercial properties instantly.</p><p><a href="https://veridiascore.com/deal-screen">https://veridiascore.com/deal-screen</a></p>`,
+          });
+        }
         console.log("Email sent successfully");
       } catch (error) {
         console.error(`Email failed: ${error instanceof Error ? error.message : String(error)}`);
