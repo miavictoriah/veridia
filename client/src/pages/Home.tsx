@@ -8,15 +8,17 @@ export default function Home() {
   const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitting(true);
+  
     try {
       await fetch("/api/signup", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email }),
       });
+  
+      localStorage.setItem("veridia_email", email);
+      window.location.href = "/deal-screen";
     } catch {
-      // Intentionally ignore failures and continue to product.
-    } finally {
       window.location.href = "/deal-screen";
     }
   };

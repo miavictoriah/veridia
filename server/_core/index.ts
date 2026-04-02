@@ -130,6 +130,45 @@ async function startServer() {
       res.status(200).json({ success: true });
     }
   });
+  app.post("/api/check-trial", async (req, res) => {
+    try {
+      const { email } = req.body ?? {};
+      const cleanEmail = String(email || "").trim().toLowerCase();
+
+      if (!cleanEmail) {
+        return res.json({ valid: false });
+      }
+
+      const mysql = await import("mysql2/promise");
+      const connection = await mysql.createConnection(process.env.DATABASE_URL!);
+
+      const [rows] = await connection.execute(
+        "SELECT created_at FROM users WHERE email = ? LIMIT 1",
+        [cleanEmail]
+      );
+
+      await connection.end();
+
+      const result = rows as Array<{ created_at: string }>;
+
+      if (result.length === 0) {
+        return res.json({ valid: false });
+      }
+
+      const createdAt = new Date(result[0].created_at);
+      const now = new Date();
+      const diffDays = (now.getTime() - createdAt.getTime()) / (1000 * 60 * 60 * 24);
+
+      if (diffDays > 7) {
+        return res.json({ valid: false, expired: true });
+      }
+
+      return res.json({ valid: true });
+    } catch (e) {
+      console.error("Trial check error:", e);
+      return res.json({ valid: false });
+    }
+  });
   // EPC lookup endpoint
   app.get("/api/epc", async (req, res) => {
     try {

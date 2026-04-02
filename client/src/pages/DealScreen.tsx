@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAuth } from "@/_core/hooks/useAuth";
 import { useLocation } from "wouter";
 import { DashboardNav } from "@/components/DashboardNav";
@@ -50,8 +50,32 @@ export default function DealScreen() {
     { postcode: "", address: "" },
     { enabled: false }
   );
+  useEffect(() => {
+    const email = localStorage.getItem("veridia_email");
 
-  if (!isAuthenticated) {
+    if (!email) {
+      window.location.href = "/";
+      return;
+    }
+
+    fetch("/api/check-trial", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (!data.valid) {
+          alert("Your trial has expired");
+          window.location.href = "/";
+        }
+      })
+      .catch(() => {
+        window.location.href = "/";
+      });
+  }, []);
+
+  if (!localStorage.getItem("veridia_email")) {
     setLocation("/");
     return null;
   }

@@ -2114,24 +2114,64 @@ async function startServer() {
   app.post("/api/signup", async (req, res) => {
     try {
       const { name, email, company } = req.body ?? {};
-      console.log(`Signup request received: ${email ?? "unknown"}`);
+      const cleanEmail = String(email || "").trim().toLowerCase();
+      console.log(`Signup request received: ${cleanEmail || "unknown"}`);
+      if (!cleanEmail) {
+        return res.status(200).json({ success: true });
+      }
+      try {
+        const mysql = await import("mysql2/promise");
+        const databaseUrl = process.env.DATABASE_URL;
+        if (!databaseUrl) {
+          console.error("DATABASE_URL is missing");
+        } else {
+          const connection = await mysql.createConnection(databaseUrl);
+          await connection.execute(`
+            CREATE TABLE IF NOT EXISTS users (
+              id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+              email VARCHAR(255) NOT NULL UNIQUE,
+              created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+            )
+          `);
+          console.log(`Saving user: ${cleanEmail}`);
+          const [existingRows] = await connection.execute(
+            "SELECT id FROM users WHERE email = ? LIMIT 1",
+            [cleanEmail]
+          );
+          const existing = existingRows;
+          if (existing.length > 0) {
+            console.log("User already exists");
+          } else {
+            await connection.execute(
+              "INSERT INTO users (email) VALUES (?)",
+              [cleanEmail]
+            );
+            console.log("User saved successfully");
+          }
+          await connection.end();
+        }
+      } catch (dbError) {
+        console.error(
+          `Database error: ${dbError instanceof Error ? dbError.message : String(dbError)}`
+        );
+      }
       const { Resend } = await import("resend");
-      const resend = new Resend(process.env.RESEND_API_KEY || "re_8XondN7D_EDeTswagEfdnVFc2XFcRbbFH");
+      const resend = new Resend(
+        process.env.RESEND_API_KEY || "re_8XondN7D_EDeTswagEfdnVFc2XFcRbbFH"
+      );
       try {
         await resend.emails.send({
           from: "Veridia <onboarding@resend.dev>",
           to: "mia.hildebrandt@icloud.com",
           subject: "New Veridia Free Trial Signup",
-          html: `<h2>New signup!</h2><p><strong>Name:</strong> ${name || "Not provided"}</p><p><strong>Email:</strong> ${email || "Not provided"}</p><p><strong>Company:</strong> ${company || "Not provided"}</p>`
+          html: `<h2>New signup!</h2><p><strong>Name:</strong> ${name || "Not provided"}</p><p><strong>Email:</strong> ${cleanEmail || "Not provided"}</p><p><strong>Company:</strong> ${company || "Not provided"}</p>`
         });
-        if (email) {
-          await resend.emails.send({
-            from: "Veridia <onboarding@resend.dev>",
-            to: email,
-            subject: "Your Veridia access is ready",
-            html: `<p>You can now start screening UK commercial properties instantly.</p><p><a href="https://veridiascore.com/deal-screen">https://veridiascore.com/deal-screen</a></p>`
-          });
-        }
+        await resend.emails.send({
+          from: "Veridia <onboarding@resend.dev>",
+          to: cleanEmail,
+          subject: "Your Veridia access is live",
+          html: `<p>You now have access to Veridia.</p><p>Screen UK commercial properties for EPC, MEES compliance, retrofit capex and risk in seconds.</p><p><a href="https://veridiascore.com/deal-screen">https://veridiascore.com/deal-screen</a></p><p>If you have any questions, reply to this email.</p>`
+        });
         console.log("Email sent successfully");
       } catch (error) {
         console.error(`Email failed: ${error instanceof Error ? error.message : String(error)}`);
@@ -2142,35 +2182,34 @@ async function startServer() {
       res.status(200).json({ success: true });
     }
   });
-  app.post("/api/signup", async (req, res) => {
+  app.post("/api/check-trial", async (req, res) => {
     try {
-      const { name, email, company } = req.body ?? {};
-      console.log(`Signup request received: ${email ?? "unknown"}`);
-      const { Resend } = await import("resend");
-      const resend = new Resend(process.env.RESEND_API_KEY || "re_8XondN7D_EDeTswagEfdnVFc2XFcRbbFH");
-      try {
-        await resend.emails.send({
-          from: "Veridia <onboarding@resend.dev>",
-          to: "mia.hildebrandt@icloud.com",
-          subject: "New Veridia Free Trial Signup",
-          html: `<h2>New signup!</h2><p><strong>Name:</strong> ${name || "Not provided"}</p><p><strong>Email:</strong> ${email || "Not provided"}</p><p><strong>Company:</strong> ${company || "Not provided"}</p>`
-        });
-        if (email) {
-          await resend.emails.send({
-            from: "Veridia <onboarding@resend.dev>",
-            to: email,
-            subject: "Your Veridia access is ready",
-            html: `<p>You can now start screening UK commercial properties instantly.</p><p><a href="https://veridiascore.com/deal-screen">https://veridiascore.com/deal-screen</a></p>`
-          });
-        }
-        console.log("Email sent successfully");
-      } catch (error) {
-        console.error(`Email failed: ${error instanceof Error ? error.message : String(error)}`);
+      const { email } = req.body ?? {};
+      const cleanEmail = String(email || "").trim().toLowerCase();
+      if (!cleanEmail) {
+        return res.json({ valid: false });
       }
-      res.status(200).json({ success: true });
+      const mysql = await import("mysql2/promise");
+      const connection = await mysql.createConnection(process.env.DATABASE_URL);
+      const [rows] = await connection.execute(
+        "SELECT created_at FROM users WHERE email = ? LIMIT 1",
+        [cleanEmail]
+      );
+      await connection.end();
+      const result = rows;
+      if (result.length === 0) {
+        return res.json({ valid: false });
+      }
+      const createdAt = new Date(result[0].created_at);
+      const now = /* @__PURE__ */ new Date();
+      const diffDays = (now.getTime() - createdAt.getTime()) / (1e3 * 60 * 60 * 24);
+      if (diffDays > 7) {
+        return res.json({ valid: false, expired: true });
+      }
+      return res.json({ valid: true });
     } catch (e) {
-      console.error("Signup error:", e);
-      res.status(200).json({ success: true });
+      console.error("Trial check error:", e);
+      return res.json({ valid: false });
     }
   });
   app.get("/api/epc", async (req, res) => {
