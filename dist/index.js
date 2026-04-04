@@ -2143,8 +2143,8 @@ async function startServer() {
             console.log("User already exists");
           } else {
             await connection.execute(
-              "INSERT INTO users (email) VALUES (?)",
-              [cleanEmail]
+              "INSERT INTO users (email, reports_used) VALUES (?, 0)",
+              [email]
             );
             console.log("User saved successfully");
           }
@@ -2210,6 +2210,33 @@ async function startServer() {
     } catch (e) {
       console.error("Trial check error:", e);
       return res.json({ valid: false });
+    }
+  });
+  app.post("/api/check-usage", async (req, res) => {
+    try {
+      const { email } = req.body ?? {};
+      const cleanEmail = String(email || "").trim().toLowerCase();
+      if (!cleanEmail) {
+        return res.json({ allowed: false });
+      }
+      const mysql = await import("mysql2/promise");
+      const connection = await mysql.createConnection(process.env.DATABASE_URL);
+      const [rows] = await connection.execute(
+        "SELECT reports_used FROM users WHERE email = ? LIMIT 1",
+        [cleanEmail]
+      );
+      await connection.end();
+      const result = rows;
+      if (!result.length) {
+        return res.json({ allowed: false });
+      }
+      if (result[0].reports_used >= 1) {
+        return res.json({ allowed: false });
+      }
+      return res.json({ allowed: true });
+    } catch (e) {
+      console.error("Usage check error:", e);
+      return res.json({ allowed: false });
     }
   });
   app.get("/api/epc", async (req, res) => {

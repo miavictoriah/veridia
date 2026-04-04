@@ -58,15 +58,15 @@ export default function DealScreen() {
       return;
     }
 
-    fetch("/api/check-trial", {
+    fetch("/api/check-usage", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email }),
     })
       .then((res) => res.json())
       .then((data) => {
-        if (!data.valid) {
-          alert("Your trial has expired");
+        if (!data.allowed) {
+          alert("Your free report has been used. Upgrade to continue.");
           window.location.href = "/";
         }
       })

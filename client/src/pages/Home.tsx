@@ -83,8 +83,8 @@ export default function Home() {
                     disabled={submitting}
                     className="h-11 rounded-lg px-6 text-[13px] font-semibold text-white whitespace-nowrap"
                     style={{ backgroundColor: "#00C9A7" }}
-                  >
-                    {submitting ? "Starting..." : "Start Screening"}
+                  >Get your first report free
+                    {submitting ? "Starting..." : ""}
                   </Button>
                 </form>
               </div>
