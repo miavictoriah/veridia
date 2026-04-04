@@ -130,78 +130,29 @@ async function startServer() {
       res.status(200).json({ success: true });
     }
   });
-  app.post("/api/check-trial", async (req, res) => {
+  app.post("/api/increment-usage", async (req, res) => {
     try {
       const { email } = req.body ?? {};
       const cleanEmail = String(email || "").trim().toLowerCase();
 
       if (!cleanEmail) {
-        return res.json({ valid: false });
+        return res.json({ success: false });
       }
 
       const mysql = await import("mysql2/promise");
       const connection = await mysql.createConnection(process.env.DATABASE_URL!);
 
-      const [rows] = await connection.execute(
-        "SELECT created_at FROM users WHERE email = ? LIMIT 1",
+      await connection.execute(
+        "UPDATE users SET reports_used = reports_used + 1 WHERE email = ?",
         [cleanEmail]
       );
 
       await connection.end();
 
-      const result = rows as Array<{ created_at: string }>;
-
-      if (result.length === 0) {
-        return res.json({ valid: false });
-      }
-
-      const createdAt = new Date(result[0].created_at);
-      const now = new Date();
-      const diffDays = (now.getTime() - createdAt.getTime()) / (1000 * 60 * 60 * 24);
-
-      if (diffDays > 7) {
-        return res.json({ valid: false, expired: true });
-      }
-
-      return res.json({ valid: true });
+      return res.json({ success: true });
     } catch (e) {
-      console.error("Trial check error:", e);
-      return res.json({ valid: false });
-    }
-  });
-  app.post("/api/check-usage", async (req, res) => {
-    try {
-      const { email } = req.body ?? {};
-      const cleanEmail = String(email || "").trim().toLowerCase();
-
-      if (!cleanEmail) {
-        return res.json({ allowed: false });
-      }
-
-      const mysql = await import("mysql2/promise");
-      const connection = await mysql.createConnection(process.env.DATABASE_URL!);
-
-      const [rows] = await connection.execute(
-        "SELECT reports_used FROM users WHERE email = ? LIMIT 1",
-        [cleanEmail]
-      );
-
-      await connection.end();
-
-      const result = rows as Array<{ reports_used: number }>;
-
-      if (!result.length) {
-        return res.json({ allowed: false });
-      }
-
-      if (result[0].reports_used >= 1) {
-        return res.json({ allowed: false });
-      }
-
-      return res.json({ allowed: true });
-    } catch (e) {
-      console.error("Usage check error:", e);
-      return res.json({ allowed: false });
+      console.error("Increment usage error:", e);
+      return res.json({ success: false });
     }
   });
   // EPC lookup endpoint

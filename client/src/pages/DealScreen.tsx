@@ -253,7 +253,15 @@ export default function DealScreen() {
       }
     })();
   };
+  const email = localStorage.getItem("veridia_email");
 
+  if (email) {
+    fetch("/api/increment-usage", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email }),
+    }).catch(() => {});
+  }
   const getRiskColor = (score: number) => {
     if (score <= 30) return "bg-green-50 border-green-200";
     if (score <= 65) return "bg-amber-50 border-amber-200";
