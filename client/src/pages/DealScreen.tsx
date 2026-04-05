@@ -56,7 +56,7 @@ export default function DealScreen() {
       window.location.href = "/";
       return;
     }
-
+  
     fetch("/api/check-usage", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -73,13 +73,6 @@ export default function DealScreen() {
         window.location.href = "/";
       });
   }, []);
-
-  const storedEmail = localStorage.getItem("veridia_email");
-
-  if (!storedEmail) {
-    setLocation("/");
-    return null;
-  }
 
   const mapAssetType = (raw: string): DealFormData["assetType"] => {
     const value = raw.toLowerCase();
