@@ -52,7 +52,7 @@ export default function DealScreen() {
   );
   useEffect(() => {
     const email = localStorage.getItem("veridia_email");
-
+  
     if (!email) {
       window.location.href = "/";
       return;
@@ -75,7 +75,9 @@ export default function DealScreen() {
       });
   }, []);
 
-  if (!localStorage.getItem("veridia_email")) {
+  const storedEmail = localStorage.getItem("veridia_email");
+
+  if (!storedEmail) {
     setLocation("/");
     return null;
   }

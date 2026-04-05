@@ -16,9 +16,10 @@ export default function Home() {
         body: JSON.stringify({ email }),
       });
   
-      localStorage.setItem("veridia_email", email);
+      localStorage.setItem("veridia_email", email.trim().toLowerCase());
       window.location.href = "/deal-screen";
     } catch {
+      localStorage.setItem("veridia_email", email.trim().toLowerCase());
       window.location.href = "/deal-screen";
     }
   };
