@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { useAuth } from "@/_core/hooks/useAuth";
 import { useLocation } from "wouter";
 import { DashboardNav } from "@/components/DashboardNav";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -34,7 +33,7 @@ interface DealResult {
 }
 
 export default function DealScreen() {
-  const { user, isAuthenticated } = useAuth();
+ 
   const [, setLocation] = useLocation();
   const [formData, setFormData] = useState<DealFormData>({
     address: "",
